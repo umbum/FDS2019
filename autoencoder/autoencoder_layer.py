@@ -5,8 +5,7 @@ import numpy as np
 import tensorflow as tf
 from autoencoder.data_load import csv_load
 
-
-source_data, answer_data = csv_load("/Users/jeonghan/Downloads/FDS_data/bs140513_032310.csv", "fraud")
+source_data, answer_data = csv_load("/Users/jeonghan/Downloads/FDS_data/bs140513_032310_striped.csv", "fraud")
 train_x, train_y = source_data, source_data
 
 # Mini-batch
@@ -21,9 +20,9 @@ def shuffle_batch(features, labels, batch_size):
 ################
 # layer params #
 ################
-n_inputs = 28 * 28
-n_hidden1 = 300  # encoder
-n_hidden2 = 150  # coding units
+n_inputs = 7
+n_hidden1 = 5  # encoder
+n_hidden2 = 3  # coding units
 n_hidden3 = n_hidden1  # decoder
 n_outputs = n_inputs  # reconstruction
 
