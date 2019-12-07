@@ -1,12 +1,15 @@
 import pandas as pd
 import hashlib
+import functools
 
 ################
 # load file    #
 ################
 
 
-def csv_load(data_csv_file, answer_label):
+# 같은 설정에 대해서는 데이터를 유지합니다.
+@functools.lru_cache()
+def source_csv_load(data_csv_file, answer_label, as_numpy=True, needs_convert=True):
     '''
     return train_x, train_y
     as numpy_ndarray
@@ -30,5 +33,8 @@ def csv_load(data_csv_file, answer_label):
         else:
             return elem
 
-    converted = source_data.applymap(str_convert)
-    return converted.to_numpy(), answer_data.to_numpy()
+    converted = source_data.applymap(str_convert) if needs_convert else source_data
+    if as_numpy:
+        return converted.to_numpy(), answer_data.to_numpy(), source_data.columns
+    else:
+        return converted, answer_data, source_data.columns
