@@ -7,12 +7,14 @@ from autoencoder.param import *
 ################
 #  data params #
 ################
-base_path = "./data"
-from_csv_file_path = os.path.join(base_path, "bs140513_032310_striped.csv")
-to_csv_file_path = os.path.join(base_path, "bs140513_032310_striped_autoencoded.csv")
-hashed_csv_file_path = os.path.join(base_path, "bs140513_032310_striped_hashed.csv")
+base_path = "../data"
+base_csv_file = "bs140513_032310_striped"
+from_csv_file_path = os.path.join(base_path, f"{base_csv_file}.csv")
+to_csv_file_path = os.path.join(base_path, f"{base_csv_file}_autoencoded.csv")
+hashed_csv_file_path = os.path.join(base_path, f"{base_csv_file}_hashed.csv")
+label_csv_file_path = os.path.join(base_path, f"{base_csv_file}_label.csv")
 
-source_data, answer_data, data_columns = source_csv_load(from_csv_file_path, "fraud")
+source_data, _, data_columns = source_csv_load(from_csv_file_path, "fraud")
 train_x, train_y = source_data, source_data
 
 # load session
@@ -25,4 +27,6 @@ source_data, answer_data, _ = source_csv_load(from_csv_file_path, "fraud", as_nu
 source_data = source_data.set_index('step')
 
 data.to_csv(to_csv_file_path)
+answer_data.to_frame('answer').set_index('answer').to_csv(label_csv_file_path)
 source_data.to_csv(hashed_csv_file_path)
+
