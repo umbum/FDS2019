@@ -7,7 +7,7 @@ from autoencoder.param import *
 ################
 #  data params #
 ################
-base_path = "/Users/jeonghan/Downloads/FDS_data"
+base_path = "./data"
 from_csv_file_path = os.path.join(base_path, "bs140513_032310_striped.csv")
 to_csv_file_path = os.path.join(base_path, "bs140513_032310_striped_autoencoded.csv")
 hashed_csv_file_path = os.path.join(base_path, "bs140513_032310_striped_hashed.csv")

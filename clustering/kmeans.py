@@ -10,7 +10,7 @@ import collections
 ################
 #  data params #
 ################
-base_path = "/Users/jeonghan/Downloads/FDS_data"
+base_path = "./data"
 answer_file_path = os.path.join(base_path, "bs140513_032310_striped.csv")
 data_file_path = os.path.join(base_path, "bs140513_032310_striped_autoencoded.csv")
 
