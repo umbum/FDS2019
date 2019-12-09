@@ -1,6 +1,6 @@
 # sckit-learn
 
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, DBSCAN
 from autoencoder import data_load
 import pandas as pd
 import os
@@ -19,7 +19,7 @@ result_file_path = os.path.join(base_path, f"{base_csv_file}_clustering_result.c
 data = pd.read_csv(data_file_path).to_numpy()
 answer_data = data_load.source_csv_load(answer_file_path, "fraud")[1]
 
-n_clusters=6
+n_clusters=10
 cluster = KMeans(n_clusters=n_clusters)
 cluster.fit(data)
 
@@ -29,10 +29,10 @@ label_ind = indexer(answer_data, 1)
 # 클러스터링 결과 파일에 출력
 with open(result_file_path, 'wt') as wf:
     print('result', file=wf)
-    print(*answer_data, file=wf)
+    print(*cluster.labels_, file=wf)
 
-print('클럿트 정')
-# 클러스터링 별 각각 정보출
+print(f'클러스터 정보 출력  {len(label_ind)}')
+# 클러스터링 별 각각 정보출룍
 for i in range(n_clusters):
     points = indexer(cluster.labels_, i)
     acc = len(points & label_ind) / len( points )
