@@ -139,11 +139,11 @@ def create_layout(app):
                                         clearable=False,
                                         options=[
                                             {
-                                                "label": "이상 거래 데이터1",
+                                                "label": "BankSim",
                                                 "value": "bs140513",
                                             },
                                             {
-                                                "label": "이상 거래 데이터1-autoencoded",
+                                                "label": "PaySim",
                                                 "value": "bs140513_autoencoded",
                                             }
                                         ],
