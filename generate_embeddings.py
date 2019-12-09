@@ -9,12 +9,12 @@ PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("data").resolve()
 
 datasets = ["bs140513"]
-iterations_ls = [250, 500, 750]
-perplexity_ls = [3, 10, 30]
+iterations_ls = [250, 500, 750, 1000]
+perplexity_ls = [3, 10, 30, 50, 100]
 pca_dim_ls = [25]
 learning_rate_ls = [10, 50, 100, 200]
 
-POINT_COUNT_BOUND = 300    # 너무 많으면 다 시각화 하는 것도 불가능하고 t-SNE 학습이 너무 오래 걸린다.
+POINT_COUNT_BOUND = 500    # 너무 많으면 다 시각화 하는 것도 불가능하고 t-SNE 학습이 너무 오래 걸린다.
 
 
 def generate_embedding(
@@ -36,6 +36,7 @@ def generate_embedding(
     if mode == "two_files":
         data = pd.read_csv(DATA_PATH.joinpath(f"{dataset}_input.csv"))
         labels = pd.read_csv(DATA_PATH.joinpath(f"{dataset}_labels.csv"))
+        clustering_result = pd.read_csv(DATA_PATH.joinpath(f"{dataset}_clustering_result.csv"))
     elif mode == "one_file":
         data = pd.read_csv(
             DATA_PATH.joinpath(f"{dataset}.csv"), index_col=0, encoding="ISO-8859-1"
@@ -43,8 +44,10 @@ def generate_embedding(
         labels = data.index
     else:
         assert "two_files || one_file"
-
-    data, labels = data[:POINT_COUNT_BOUND], labels[:POINT_COUNT_BOUND]  
+    
+    data = data[:POINT_COUNT_BOUND]
+    labels = labels[:POINT_COUNT_BOUND]
+    clustering_result = clustering_result[:POINT_COUNT_BOUND]
     nb_col = data.shape[1]
 
     pca = PCA(n_components=min(nb_col, pca_dim))
@@ -63,6 +66,8 @@ def generate_embedding(
     embedding_df = pd.DataFrame(embedding, columns=["x", "y", "z"])
 
     embedding_df.index = np.squeeze(labels.values)
+
+    embedding_df["cluster"] = np.squeeze(clustering_result.values)
 
     embedding_df.to_csv(path + f"/data.csv")
 

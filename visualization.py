@@ -227,17 +227,47 @@ def create_layout(app):
 def set_callbacks(app):
     def generate_figure(groups, layout):
         data = []
+        types = {
+            "TP" : {
+                "symbol":"cross",
+                "opacity":0.7,
+            },
+            "TN" : {
+                "symbol":"diamond",
+                "opacity":1,
+            },
+            "FP" : {
+                "symbol":"square",
+                "opacity":1,
+            },
+            "FN" : {
+                "symbol":"circle",
+                "opacity":1,
+            }
+        }
 
-        for idx, val in groups:
+        for group_key, val in groups:
+            label, cluster = group_key
+            if label == 0 and cluster == 0:
+                name = "TP"
+            elif label == 0 and cluster == 1:
+                name = "FN"
+            elif label == 1 and cluster == 0:
+                name = "FP"
+            else:
+                name = "TN"
+
             scatter = go.Scatter3d(
-                name=idx,
+                name=name,
                 x=val["x"],
                 y=val["y"],
                 z=val["z"],
-                text=[idx for _ in range(val["x"].shape[0])],
+                text=[label for _ in range(val["x"].shape[0])],
                 textposition="top center",
                 mode="markers",
-                marker=dict(size=3, symbol="circle"),
+                marker=dict(size=4, 
+                symbol=types[name]["symbol"],
+                opacity=types[name]["opacity"]),
             )
             data.append(scatter)
 
@@ -325,7 +355,7 @@ def set_callbacks(app):
             if dataset in TRANSACTION_DATASETS:
                 embedding_df["label"] = embedding_df.index
 
-                groups = embedding_df.groupby("label")
+                groups = embedding_df.groupby(["label", "cluster"])
                 figure = generate_figure(groups, layout)
 
             else:
