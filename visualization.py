@@ -230,19 +230,19 @@ def set_callbacks(app):
         types = {
             "TP" : {
                 "symbol":"cross",
-                "opacity":0.7,
+                "opacity":0.5,
             },
             "TN" : {
                 "symbol":"diamond",
-                "opacity":1,
+                "opacity":0.9,
             },
             "FP" : {
                 "symbol":"square",
-                "opacity":1,
+                "opacity":0.9,
             },
             "FN" : {
                 "symbol":"circle",
-                "opacity":1,
+                "opacity":0.9,
             }
         }
 
