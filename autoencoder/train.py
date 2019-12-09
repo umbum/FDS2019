@@ -8,7 +8,7 @@ from autoencoder.param import *
 ################
 #  data params #
 ################
-csv_file_path = "./data/bs140513_032310_striped.csv"
+csv_file_path = "../data/bs140513_032310_striped.csv"
 source_data, answer_data, data_columns = source_csv_load(csv_file_path, "fraud")
 train_x, train_y = source_data, source_data
 

@@ -10,9 +10,11 @@ import collections
 ################
 #  data params #
 ################
-base_path = "./data"
-answer_file_path = os.path.join(base_path, "bs140513_032310_striped.csv")
-data_file_path = os.path.join(base_path, "bs140513_032310_striped_autoencoded.csv")
+base_path = "../data"
+base_csv_file = "bs140513_032310_striped"
+answer_file_path =  os.path.join(base_path, f"{base_csv_file}.csv")
+data_file_path = os.path.join(base_path, f"{base_csv_file}_autoencoded.csv")
+result_file_path = os.path.join(base_path, f"{base_csv_file}_label.csv")
 
 data = pd.read_csv(data_file_path).to_numpy()
 answer_data = data_load.source_csv_load(answer_file_path, "fraud")[1]
@@ -29,4 +31,9 @@ pr = collections.OrderedDict(
     total_size = len(a | p),
     wrong_size = len(a | p) - len(a & p),
 )
+
+with open(result_file_path, 'wt') as wf:
+    print('label', file=wf)
+    print(*cluster.labels_, sep='\n', file=wf)
+
 pprint.pprint(pr)

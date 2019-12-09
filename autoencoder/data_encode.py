@@ -11,7 +11,7 @@ base_path = "../data"
 base_csv_file = "bs140513_032310_striped"
 from_csv_file_path = os.path.join(base_path, f"{base_csv_file}.csv")
 to_csv_file_path = os.path.join(base_path, f"{base_csv_file}_autoencoded.csv")
-hashed_csv_file_path = os.path.join(base_path, f"{base_csv_file}_hashed.csv")
+hashed_csv_file_path = os.path.join(base_path, f"{base_csv_file}_input.csv")
 label_csv_file_path = os.path.join(base_path, f"{base_csv_file}_label.csv")
 
 source_data, _, data_columns = source_csv_load(from_csv_file_path, "fraud")
