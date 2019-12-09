@@ -10,6 +10,9 @@ $ pip3 install -r requirements.txt
 
 #### Run
 ```bash
+// 시각화 데이터 생성
+$ python3 generate_embeddings.py
+// 실행
 $ python3 app.py
 ```
 

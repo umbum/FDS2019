@@ -1,0 +1,4 @@
+embeddings
+.vscode
+__pycache__
+*.ipynb
