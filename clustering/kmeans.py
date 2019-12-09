@@ -29,7 +29,7 @@ label_ind = indexer(answer_data, 1)
 # 클러스터링 결과 파일에 출력
 with open(result_file_path, 'wt') as wf:
     print('result', file=wf)
-    print(*cluster.labels_, file=wf)
+    print(*cluster.labels_, sep='\n', file=wf)
 
 print(f'클러스터 정보 출력  {len(label_ind)}')
 # 클러스터링 별 각각 정보출룍
