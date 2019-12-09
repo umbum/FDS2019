@@ -210,9 +210,10 @@ body {
 }
 
 
-pre {
+#div-plot-click-image pre {
   height: 60vh;
   overflow-x: scroll;
   overflow-y: scroll;
   border: thin solid lightgrey;
+  background-color: #FFFFFF;
 }
