@@ -27,6 +27,6 @@ source_data, answer_data, _ = source_csv_load(from_csv_file_path, "fraud", as_nu
 source_data = source_data.set_index('step')
 
 data.to_csv(to_csv_file_path)
-answer_data.to_frame('answer').set_index('answer').to_csv(label_csv_file_path)
+answer_data.to_frame('label').set_index('label').to_csv(label_csv_file_path)
 source_data.to_csv(hashed_csv_file_path)
 

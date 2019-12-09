@@ -18,7 +18,7 @@ SAVER_MODEL_NAME = "autoencoder"
 # layer params #
 ################
 n_inputs = 7
-n_hidden1 = 5  # encoder
+n_hidden1 = 3  # encoder
 # n_hidden2 = 3  # coding units
 # n_hidden3 = n_hidden1  # decoder
 n_outputs = n_inputs  # reconstruction
