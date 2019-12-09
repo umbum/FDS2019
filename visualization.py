@@ -228,34 +228,38 @@ def set_callbacks(app):
     def generate_figure(groups, layout):
         data = []
         types = {
-            "TP" : {
+            "TN" : {
                 "symbol":"cross",
                 "opacity":0.5,
+                "size": 4,
             },
-            "TN" : {
-                "symbol":"diamond",
-                "opacity":0.9,
-            },
-            "FP" : {
+            "TP" : {
                 "symbol":"square",
                 "opacity":0.9,
+                "size": 4,
             },
             "FN" : {
-                "symbol":"circle",
+                "symbol":"diamond",
                 "opacity":0.9,
-            }
+                "size": 3,
+            },
+            "FP" : {
+                "symbol":"circle",
+                "opacity":0.8,
+                "size": 4,
+            },
         }
 
         for group_key, val in groups:
             label, cluster = group_key
             if label == 0 and cluster == 0:
-                name = "TP"
-            elif label == 0 and cluster == 1:
-                name = "FN"
-            elif label == 1 and cluster == 0:
-                name = "FP"
-            else:
                 name = "TN"
+            elif label == 0 and cluster == 1:
+                name = "FP"
+            elif label == 1 and cluster == 0:
+                name = "FN"
+            else:
+                name = "TP"
 
             scatter = go.Scatter3d(
                 name=name,
@@ -265,9 +269,9 @@ def set_callbacks(app):
                 text=[label for _ in range(val["x"].shape[0])],
                 textposition="top center",
                 mode="markers",
-                marker=dict(size=4, 
-                symbol=types[name]["symbol"],
-                opacity=types[name]["opacity"]),
+                marker=dict(symbol=types[name]["symbol"],
+                    size=types[name]["size"], 
+                    opacity=types[name]["opacity"]),
             )
             data.append(scatter)
 
