@@ -2,6 +2,7 @@ import base64
 import io
 import pathlib
 import json
+import pprint
 
 import numpy as np
 import dash
@@ -22,13 +23,11 @@ DATA_PATH = PATH.joinpath("data").resolve()
 
 origin_datas = {
     # numerical dataset : corresponding original dataset
-    "bs140513_032310_striped_hashed": pd.read_csv(DATA_PATH.joinpath("bs140513_032310.csv")),
-    "mnist_3000": pd.read_csv(DATA_PATH.joinpath("mnist_3000_input.csv")),
+    "bs140513": pd.read_csv(DATA_PATH.joinpath("bs140513_origin.csv")),
 }
 
 # Import datasets here for running the Local version
-IMAGE_DATASETS = ("mnist_3000")
-TRANSACTION_DATASETS = ("bs140513_032310_striped_hashed")
+TRANSACTION_DATASETS = ("bs140513")
 
 with open(PATH.joinpath("intro.md"), "r") as file:
     intro_md = file.read()
@@ -140,16 +139,16 @@ def create_layout(app):
                                         clearable=False,
                                         options=[
                                             {
-                                                "label": "원본 데이터",
-                                                "value": "bs140513_032310_striped_hashed",
+                                                "label": "이상 거래 데이터1",
+                                                "value": "bs140513",
                                             },
                                             {
-                                                "label": "MNIST Digits",
-                                                "value": "mnist_3000",
+                                                "label": "이상 거래 데이터1-autoencoded",
+                                                "value": "bs140513_autoencoded",
                                             }
                                         ],
                                         placeholder="Select a dataset",
-                                        value="bs140513_032310_striped_hashed",
+                                        value="bs140513",
                                     ),
                                     NamedSlider(
                                         name="Number Of Iterations",
@@ -177,7 +176,7 @@ def create_layout(app):
                                         min=25,
                                         max=100,
                                         step=None,
-                                        val=50,
+                                        val=25,
                                         marks={i: str(i) for i in [25, 50, 100]},
                                     ),
                                     NamedSlider(
@@ -323,7 +322,7 @@ def set_callbacks(app):
                 scene=dict(xaxis=axes, yaxis=axes, zaxis=axes),
             )
 
-            if dataset in IMAGE_DATASETS or dataset in TRANSACTION_DATASETS:
+            if dataset in TRANSACTION_DATASETS:
                 embedding_df["label"] = embedding_df.index
 
                 groups = embedding_df.groupby("label")
@@ -382,8 +381,7 @@ def set_callbacks(app):
 
             # Retrieve the data corresponding to the index (Dimension reduction 이전의 원래 vector)
             origin_vector = origin_datas[dataset].iloc[clicked_idx]
-
-            import pprint
+            
             return html.Pre(children=pprint.pformat(origin_vector.to_dict()))
 
     @app.callback(
@@ -392,13 +390,7 @@ def set_callbacks(app):
     )
     def display_click_message(clickData, dataset):
         # Displays message shown when a point in the graph is clicked, depending whether it's an image or word
-        if dataset in IMAGE_DATASETS:
-            if clickData:
-                return "Image Selected"
-            else:
-                return "Click a data point on the scatter plot to display its corresponding image."
-        
-        elif dataset in TRANSACTION_DATASETS:
+        if dataset in TRANSACTION_DATASETS:
             if clickData:
                 return "Transaction Selected"
             else:

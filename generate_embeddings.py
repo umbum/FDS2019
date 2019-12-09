@@ -8,22 +8,19 @@ import pandas as pd
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("data").resolve()
 
-# datasets = ["wikipedia_3000", "twitter_3000", "crawler_3000"]
-# iterations_ls = [250, 500, 750, 1000]
-# perplexity_ls = [3, 10, 30, 50, 100]
-# pca_dim_ls = [25, 50, 100]
-# learning_rate_ls = [10, 50, 100, 200]
-datasets = ["bs140513_032310_striped_hashed"]
+datasets = ["bs140513"]
 iterations_ls = [250, 500, 750]
 perplexity_ls = [3, 10, 30]
 pca_dim_ls = [25]
-learning_rate_ls = [10, 50, 100]
+learning_rate_ls = [10, 50, 100, 200]
+
+POINT_COUNT_BOUND = 300    # 너무 많으면 다 시각화 하는 것도 불가능하고 t-SNE 학습이 너무 오래 걸린다.
 
 
 def generate_embedding(
     dataset, iterations, perplexity, pca_dim, learning_rate, verbose=1, mode="two_files"
 ):
-    path = f"demo_embeddings/{dataset}/iterations_{iterations}/perplexity_{perplexity}/pca_{pca_dim}/learning_rate_{learning_rate}"
+    path = f"embeddings/{dataset}/iterations_{iterations}/perplexity_{perplexity}/pca_{pca_dim}/learning_rate_{learning_rate}"
 
     def display(string):
         if verbose:
@@ -40,7 +37,6 @@ def generate_embedding(
         data = pd.read_csv(DATA_PATH.joinpath(f"{dataset}_input.csv"))
         labels = pd.read_csv(DATA_PATH.joinpath(f"{dataset}_labels.csv"))
     elif mode == "one_file":
-        # data = pd.read_csv("/Users/umbum/source/dash-sample-apps/apps/dash-tsne/data/bs140513_032310_striped_hashed.csv", index_col=0, encoding="ISO-8859-1")
         data = pd.read_csv(
             DATA_PATH.joinpath(f"{dataset}.csv"), index_col=0, encoding="ISO-8859-1"
         )
@@ -48,7 +44,7 @@ def generate_embedding(
     else:
         assert "two_files || one_file"
 
-    data, labels = data[:300], labels[:300]  # 너무 많으면 다 시각화 하는 것도 불가능하고 t-SNE 학습이 너무 오래 걸린다.
+    data, labels = data[:POINT_COUNT_BOUND], labels[:POINT_COUNT_BOUND]  
     nb_col = data.shape[1]
 
     pca = PCA(n_components=min(nb_col, pca_dim))
