@@ -3,6 +3,7 @@ import io
 import pathlib
 import json
 import pprint
+import codecs
 
 import numpy as np
 import dash
@@ -29,10 +30,11 @@ origin_datas = {
 # Import datasets here for running the Local version
 TRANSACTION_DATASETS = ("bs140513")
 
-with open(PATH.joinpath("intro.md"), "r") as file:
+
+with codecs.open(PATH.joinpath("intro.md"), "r", encoding="utf-8") as file:
     intro_md = file.read()
 
-with open(PATH.joinpath("README.md"), "r") as file:
+with codecs.open(PATH.joinpath("README.md"), "r", encoding="utf-8") as file:
     readme_md = file.read()
 
 
