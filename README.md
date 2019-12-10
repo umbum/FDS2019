@@ -8,6 +8,18 @@ $ cd FDS2019
 $ pip3 install -r requirements.txt
 ```
 
+#### Clustering
+
+##### 데이터 전처리
+* autoencoder 폴더에서 작업
+    1. params.py의 n_inputs를 입력 데이터 차원에 맞추고, 아래 두 실행파일에서 데이터 파일이름 입력.
+    2. `python3 train.py`를 통해 오토인코더 학습 모델 생성.
+    3. `python3 data_encodde.py`를 통해서 오토인코딩한 데이터 생성.
+
+##### 클러스터링 진행
+* clustering 폴더에서 작업
+    1. `python3 kmeans.py`를 실행시켜 클러스터링 레이블 생성
+
 #### Run
 ```bash
 // 시각화 데이터 생성. POINT_COUNT_BOUND=5000이면 약 10분 소요.
