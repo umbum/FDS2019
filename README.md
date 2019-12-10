@@ -10,7 +10,7 @@ $ pip3 install -r requirements.txt
 
 #### Run
 ```bash
-// 시각화 데이터 생성
+// 시각화 데이터 생성. POINT_COUNT_BOUND=5000이면 약 10분 소요.
 $ python3 generate_embeddings.py
 // 실행
 $ python3 app.py
