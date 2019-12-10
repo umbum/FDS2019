@@ -1,0 +1,6 @@
+model_checkpoint_path: "autoencoder-20"
+all_model_checkpoint_paths: "autoencoder-16"
+all_model_checkpoint_paths: "autoencoder-17"
+all_model_checkpoint_paths: "autoencoder-18"
+all_model_checkpoint_paths: "autoencoder-19"
+all_model_checkpoint_paths: "autoencoder-20"
