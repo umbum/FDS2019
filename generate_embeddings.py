@@ -72,23 +72,16 @@ def generate_embedding(
     display(f"{path} has been generated.")
 
 
-from concurrent.futures import ProcessPoolExecutor
-with ProcessPoolExecutor(max_workers=8) as executor:
-    q = []
-    for dataset in datasets:
-        for iterations in iterations_ls:
-            for perplexity in perplexity_ls:
-                for pca_dim in pca_dim_ls:
-                    for learning_rate in learning_rate_ls:
-                        args = [dataset, iterations, perplexity, pca_dim, learning_rate]
-                        kwargs = dict(mode='two_files',)
-                        q.append( executor.submit(generate_embedding, *args, **kwargs) )
-                        # generate_embedding(
-                        #     dataset,
-                        #     iterations,
-                        #     perplexity,
-                        #     pca_dim,
-                        #     learning_rate,
-                        #     mode="two_files",
-                        # )
-
+for dataset in datasets:
+    for iterations in iterations_ls:
+        for perplexity in perplexity_ls:
+            for pca_dim in pca_dim_ls:
+                for learning_rate in learning_rate_ls:
+                    generate_embedding(
+                        dataset,
+                        iterations,
+                        perplexity,
+                        pca_dim,
+                        learning_rate,
+                        mode="two_files",
+                    )
