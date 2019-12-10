@@ -18,8 +18,9 @@ $ python3 app.py
 
 #### Dataset Naming convention
 ```
-/data/{dataset_name}_origin.csv               # original  dataset (문자열 필드 등.)
-/data/{dataset_name}_input.csv                # numerical dataset
+/data/{dataset_name}_origin.csv               # original  dataset (시각화 과정에 사용됨)
+/data/{dataset_name}_numerical.csv            # 문자열 필드를 hash하여 실수로 변경한 dataset (없어도 상관 없음)
+/data/{dataset_name}_input.csv                # autoencoded dataset (시각화 과정 input으로 들어감)
 /data/{dataset_name}_labels.csv               # label data
 /data/{dataset_name}_clustering_result.csv    # clustering result label data
 ```

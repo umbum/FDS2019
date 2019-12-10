@@ -7,7 +7,7 @@ import pandas as pd
 
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("data").resolve()
-POINT_COUNT_BOUND = 6000    # 너무 많으면 다 시각화 하는 것도 불가능하고 t-SNE 학습이 너무 오래 걸린다.
+POINT_COUNT_BOUND = 5000    # 너무 많으면 다 시각화 하는 것도 불가능하고 t-SNE 학습이 너무 오래 걸린다.
 
 datasets = ["bs140513"]
 iterations_ls = [250, 500, 750, 1000]
