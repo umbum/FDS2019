@@ -11,6 +11,7 @@ import functools
 @functools.lru_cache()
 def source_csv_load(data_csv_file, answer_label, as_numpy=True, needs_convert=True):
     '''
+    내부적으로 해싱을 진행합니다.
     return train_x, train_y
     as numpy_ndarray
     '''

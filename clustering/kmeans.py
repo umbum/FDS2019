@@ -11,9 +11,9 @@ import collections
 #  data params #
 ################
 base_path = "../data"
-base_csv_file = "bs140513_032310_striped"
-answer_file_path =  os.path.join(base_path, f"{base_csv_file}.csv")
-data_file_path = os.path.join(base_path, f"{base_csv_file}_autoencoded.csv")
+base_csv_file = "bs140513"
+answer_file_path =  os.path.join(base_path, f"{base_csv_file}_origin.csv")
+data_file_path = os.path.join(base_path, f"{base_csv_file}_input.csv")
 result_file_path = os.path.join(base_path, f"{base_csv_file}_{{}}_clustering_result.csv")
 
 data = pd.read_csv(data_file_path).to_numpy()

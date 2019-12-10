@@ -8,11 +8,11 @@ from autoencoder.param import *
 #  data params #
 ################
 base_path = "../data"
-base_csv_file = "bs140513_032310_striped"
-from_csv_file_path = os.path.join(base_path, f"{base_csv_file}.csv")
-to_csv_file_path = os.path.join(base_path, f"{base_csv_file}_autoencoded.csv")
-hashed_csv_file_path = os.path.join(base_path, f"{base_csv_file}_input.csv")
-label_csv_file_path = os.path.join(base_path, f"{base_csv_file}_label.csv")
+base_csv_file = "bs140513"
+from_csv_file_path = os.path.join(base_path, f"{base_csv_file}_origin.csv")
+to_csv_file_path = os.path.join(base_path, f"{base_csv_file}_input.csv")
+hashed_csv_file_path = os.path.join(base_path, f"{base_csv_file}_numerical.csv")
+label_csv_file_path = os.path.join(base_path, f"{base_csv_file}_labels.csv")
 
 source_data, _, data_columns = source_csv_load(from_csv_file_path, "fraud")
 train_x, train_y = source_data, source_data
