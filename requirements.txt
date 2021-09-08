@@ -1,5 +1,5 @@
 dash==1.7.0
 numpy==1.17.4
 pandas==0.25.3
-Pillow==6.2.1
+Pillow==8.3.2
 scikit-learn==0.22
