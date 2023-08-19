@@ -1,5 +1,9 @@
+# Fraud Detection & Visualization
+<img width="219" alt="image" src="https://github.com/umbum/FDS2019/assets/25507015/9723a300-bc73-4df5-9990-c529f298fad8">
+<img width="452" alt="image" src="https://github.com/umbum/FDS2019/assets/25507015/04a6cb5a-fdeb-4e4f-89ce-637da1109e49">
 
 
+# Installation and Getting Started
 #### Install
 - python3
 ```bash
